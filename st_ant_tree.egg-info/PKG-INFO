@@ -1,3 +1,15 @@
+Metadata-Version: 2.1
+Name: st-ant-tree
+Version: 0.0.3
+Summary: Streamlit Component for ANT Tree
+Home-page: https://github.com/flucas96/st_ant_tree
+Author: 
+Author-email: 
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
 Streamlit ANT Tree Select Component
 ===
 
@@ -144,6 +156,8 @@ It is possible to add **HTML Styling** to the title
 **Set the placeholder text in the selector**
 
     st_ant_tree(...,placeholder="Choose an option")
+
+
 
 
 
