@@ -67,11 +67,11 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
     treeLine : bool (default = True)
         Whether show tree node line.
     onChange : str (default = "")
-        The callback function when the value of the dropdown changes.
+        The callback function when the value of the dropdown changes. - The function must be JavaScript e.g. console.log("Hello World")
     onSelect : str (default = "")
-        The callback function when a tree node is selected.
+        The callback function when a tree node is selected. - The function must be JavaScript e.g. console.log("Hello World")
     onSearch : str (default = "")
-        The callback function when the search input changes.
+        The callback function when the search input changes.- The function must be JavaScript e.g. console.log("Hello World")
     defaultValue : str (default = None)
         The default value of the dropdown.
     onTreeExpand : str (default = "")
@@ -102,8 +102,4 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
         treeDefaultExpandedKeys = treeDefaultExpandedKeys, treeLine = treeLine, on_change = onChange, on_celect = onSelect, on_search = onSearch, default= defaultValue, defaultValue = defaultValue, min_height_dropdown = min_height_dropdown, onTreeExpand = onTreeExpand,
         onTreeLoad = onTreeLoad, maxTagCount = maxTagCount,status=status,key = key)
 
-    
-    if component_value  == "_NONE_":
-        return None
-    
     return component_value

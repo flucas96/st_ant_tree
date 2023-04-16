@@ -45,6 +45,10 @@ with st.sidebar:
     status = st.selectbox("Status",["","warning","error"],index=0)
 
 
+  with st.expander("'on' Fuctions",expanded=True):
+    on_change = st.text_area("on_change","""console.log("Value chagned")""")
+
+
 
 
 
