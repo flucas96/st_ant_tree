@@ -26,8 +26,8 @@ else:
 def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True, max_height:int = 400, width_dropdown: str = "90%", disabled:bool = False, 
     	dropdownStyle: str = "{}", style: str = "{}",filterTreeNode: bool = True, multiple: bool = False, placeholder: str = "Choose an option",
         showArrow: bool = True, showSearch: bool = True, treeCheckable: bool = True, treeDefaultExpandAll: bool = False,
-        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = "", onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100,
-        maxTagCount:int= False,status: str=None, key = "first_tree") -> int:
+        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = "", onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100, treeDefaultSelectedKeys: list = [],
+        maxTagCount:int= False,status: str=None, key = "first_tree", only_children_select:bool = False) -> int:
     """
 
     Parameters
@@ -84,6 +84,8 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
         The status of the dropdown. 'error'  'warning'
     key : str (default = "first_tree")
         The key of the dropdown.
+    treeDefaultSelectedKeys: list (default = [])
+        The keys of the default selected tree nodes.
 
     Returns
     -------
@@ -100,6 +102,7 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
         dropdownStyle = dropdownStyle, style  = style, filterTreeNode = filterTreeNode, multiple = multiple, placeholder = placeholder,
         showArrow = showArrow, showSearch = showSearch, treeCheckable = treeCheckable, treeDefaultExpandAll = treeDefaultExpandAll,
         treeDefaultExpandedKeys = treeDefaultExpandedKeys, treeLine = treeLine, on_change = onChange, on_celect = onSelect, on_search = onSearch, default= defaultValue, defaultValue = defaultValue, min_height_dropdown = min_height_dropdown, onTreeExpand = onTreeExpand,
-        onTreeLoad = onTreeLoad, maxTagCount = maxTagCount,status=status,key = key)
+        onTreeLoad = onTreeLoad, maxTagCount = maxTagCount,status=status,key = key, treeDefaultSelectedKeys = treeDefaultSelectedKeys,
+        only_children_select = only_children_select)
 
     return component_value

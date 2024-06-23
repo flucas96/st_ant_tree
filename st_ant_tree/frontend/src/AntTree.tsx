@@ -10,6 +10,13 @@ import {
 import { TreeSelect } from 'antd';
 import parse, {Element } from 'html-react-parser';
 
+interface TreeNode {
+  title: string | JSX.Element;
+  key: string;
+  disabled?: boolean;
+  children?: TreeNode[];
+  style?: React.CSSProperties; // Optional style object for custom styling
+}
 
 //parser to parse the html from the strings in treeData
 const parser = (input: string) =>
@@ -62,16 +69,30 @@ function find_dropdown() {
 ////Tree Component////
 const TreeComponent = (props: ComponentProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
-
-  const {treeData, allowClear, bordered, max_height, width_dropdown, disabled,
-    filterTreeNode,multiple, placeholder, status,
-    showArrow, showSearch, treeCheckable, treeDefaultExpandAll, treeDefaultExpandedKeys,
-    treeLine, on_change, on_select, on_search, defaultValue, min_height_dropdown, maxTagCount, key} = props.args; //Python Args
+  const [searchValue, setSearchValue] = useState('');
 
 
+  const {
+    treeData, allowClear, bordered, max_height, width_dropdown, disabled,
+     multiple, placeholder, status, showArrow, showSearch,
+    treeCheckable, treeDefaultExpandAll, treeDefaultExpandedKeys, treeLine,
+    on_change, on_select, on_search, defaultValue, min_height_dropdown,
+    maxTagCount, key, treeDefaultSelectedKeys, only_children_select, overall_css
+  } = props.args;
+  
   useEffect(() => {
     Streamlit.setFrameHeight();
   }, []);
+
+
+  const filterTreeNode = (inputValue: string, treeNode: unknown): boolean => {
+    const node = treeNode as { title: string; value: string; children?: any[] };
+    const searchString = inputValue.toLowerCase();
+    return node.title.toLowerCase().includes(searchString) ||
+           node.value.toLowerCase().includes(searchString);
+  };
+  
+
 
   //Everything the the dropdown visibility changes the height of the component must change as well
   const onDropdownVisibleChange = () => {
@@ -91,18 +112,19 @@ const TreeComponent = (props: ComponentProps) => {
       Streamlit.setFrameHeight(set_height);
     }
     else {
-      Streamlit.setFrameHeight(min_height_dropdown);
+      Streamlit.setFrameHeight();
+     // Streamlit.setFrameHeight(min_height_dropdown);
     }
     }, 1);
   };
 
 
-  if (on_change) {
-    var on_change_func = Function(on_change);
-  }
-  else {
-    var on_change_func = Function();
-  }
+  // if (on_change) {
+  //   var on_change_func = Function(on_change);
+  // }
+  // else {
+  //   var on_change_func = Function();
+  // }
 
   if (on_select) {
     var on_select_func = Function(on_select);
@@ -129,7 +151,7 @@ const TreeComponent = (props: ComponentProps) => {
   const onChange = (newValue: string) => {
     setValue(newValue);
     Streamlit.setComponentValue(newValue);
-    on_change_func();
+   // on_change_func();
   };
 
   const onSelect = () => {
@@ -161,32 +183,61 @@ const TreeComponent = (props: ComponentProps) => {
   }
 
   //function to loop through treeData and parse the html if necessary
-  function loop_through_treeData(treeData: any) {
-    treeData.forEach((element: any) => {
-      //if element.title is a string
-      if (element.title && typeof element.title === "string")
-      {
-        element.title = parser(element.title)
-      }
+//   function loop_through_treeData(treeData: any) {
+//     treeData.forEach((element: any) => {
+//       //if element.title is a string
+//       if (element.title && typeof element.title === "string")
+//       {
+//         element.title = parser(element.title)
+//       }
 
-      //detect how many children the element has if those have children too without looping through them all 
-      if (element.children) {
-        //if the element has children loop through them
-        loop_through_treeData(element.children)
-      }
-    });
+//       //detect how many children the element has if those have children too without looping through them all 
+//       if (element.children) {
+//         //if the element has children loop through them
+//         loop_through_treeData(element.children)
+//       }
+//     });
 
-  }
+//   }
+// loop_through_treeData(treeData)
+
+ // Function to loop through treeData and modify it as necessary
+// Function to loop through treeData and modify it as necessary
+// Parser to ensure the output is either a string or a single JSX Element
+
 loop_through_treeData(treeData)
+
+function loop_through_treeData(treeData: any) {
+  treeData.forEach((element: any) => {
+    //if element.title is a string
+    if (element.title && typeof element.title === "string")
+    {
+      element.title = parser(element.title)
+    }
+
+    //detect how many children the element has if those have children too without looping through them all 
+    if (element.children) {
+      //if the element has children loop through them
+      if (only_children_select) {
+        element.disabled = true;
+      }
+      loop_through_treeData(element.children)
+    }
+  });
+
+}
+
 
 
 
   return (
+    <div>
+    <style dangerouslySetInnerHTML={{ __html: overall_css }} />
     <TreeSelect
       id  = {key}
       showSearch = {showSearch}
       showArrow = {showArrow}
-      filterTreeNode = {filterTreeNode}
+     // filterTreeNode = {filterTreeNode}
       multiple = {multiple}
       disabled = {disabled}
       treeCheckable = {treeCheckable}
@@ -214,9 +265,11 @@ loop_through_treeData(treeData)
       //on clear
       bordered = {bordered}
 
-
+      
     />
+    </div>
   );
+  
 };
 
 

@@ -1,3 +1,4 @@
+LICENSE
 MANIFEST.in
 README.md
 setup.py
@@ -7,15 +8,4 @@ st_ant_tree.egg-info/SOURCES.txt
 st_ant_tree.egg-info/dependency_links.txt
 st_ant_tree.egg-info/requires.txt
 st_ant_tree.egg-info/top_level.txt
-st_ant_tree/frontend/build/asset-manifest.json
 st_ant_tree/frontend/build/bootstrap.min.css
-st_ant_tree/frontend/build/index.html
-st_ant_tree/frontend/build/precache-manifest.9b7eb6b5bf56a8a8356fc454e37c0aa0.js
-st_ant_tree/frontend/build/service-worker.js
-st_ant_tree/frontend/build/static/js/2.c9a1d1a1.chunk.js
-st_ant_tree/frontend/build/static/js/2.c9a1d1a1.chunk.js.LICENSE.txt
-st_ant_tree/frontend/build/static/js/2.c9a1d1a1.chunk.js.map
-st_ant_tree/frontend/build/static/js/main.1f0757f0.chunk.js
-st_ant_tree/frontend/build/static/js/main.1f0757f0.chunk.js.map
-st_ant_tree/frontend/build/static/js/runtime-main.c3c377d8.js
-st_ant_tree/frontend/build/static/js/runtime-main.c3c377d8.js.map

@@ -1,7 +1,7 @@
 import streamlit.components.v1 as components
 import os
 
-_RELEASE = True
+_RELEASE = False
 
 
 if not _RELEASE:
@@ -26,8 +26,8 @@ else:
 def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True, max_height:int = 400, width_dropdown: str = "90%", disabled:bool = False, 
     	dropdownStyle: str = "{}", style: str = "{}",filterTreeNode: bool = True, multiple: bool = False, placeholder: str = "Choose an option",
         showArrow: bool = True, showSearch: bool = True, treeCheckable: bool = True, treeDefaultExpandAll: bool = False,
-        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = "", onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100,
-        maxTagCount:int= False,status: str=None, key = "first_tree") -> int:
+        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = None, onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100,
+        maxTagCount:int= False,status: str=None, key = "first_tree",only_children_select=False, disable_disabled_style:bool = False, overall_css:str="") -> int:
     """
 
     Parameters
@@ -84,6 +84,8 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
         The status of the dropdown. 'error'  'warning'
     key : str (default = "first_tree")
         The key of the dropdown.
+    overall_css : str (default = "")
+        The overall css of the dropdown.
 
     Returns
     -------
@@ -100,6 +102,6 @@ def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True
         dropdownStyle = dropdownStyle, style  = style, filterTreeNode = filterTreeNode, multiple = multiple, placeholder = placeholder,
         showArrow = showArrow, showSearch = showSearch, treeCheckable = treeCheckable, treeDefaultExpandAll = treeDefaultExpandAll,
         treeDefaultExpandedKeys = treeDefaultExpandedKeys, treeLine = treeLine, on_change = onChange, on_celect = onSelect, on_search = onSearch, default= defaultValue, defaultValue = defaultValue, min_height_dropdown = min_height_dropdown, onTreeExpand = onTreeExpand,
-        onTreeLoad = onTreeLoad, maxTagCount = maxTagCount,status=status,key = key)
+        onTreeLoad = onTreeLoad, maxTagCount = maxTagCount,status=status,key = key, only_children_select = only_children_select,disable_disabled_style=disable_disabled_style, overall_css=overall_css)
 
     return component_value
