@@ -161,3 +161,12 @@ value = st_ant_tree(treeData=tree_data, allowClear= {allow_clear}, bordered= {bo
 multiple= {multiple}, placeholder= "{placeholder}", showArrow= {show_arrow}, showSearch= {show_search}, treeCheckable= {tree_checkable},
 width_dropdown= "{str(widthdrop)}%", disabled= {disabled}, maxTagCount={maxtagcount})
 ''')
+
+value = st_ant_tree(treeData=tree_data, allowClear= True, bordered= border, max_height= maxheight, filterTreeNode= filter_treenode, multiple= False,
+                    placeholder= placeholder, showArrow= show_arrow, showSearch= show_search, treeCheckable= False, 
+width_dropdown= str(widthdrop) +"%", disabled= disabled, key="4", maxTagCount=maxtagcount,status=status, overall_css=".ant-select-selector {background-color: lightgrey !important;}",
+only_children_select = False, 
+#disable_disabled_style= False
+)
+
+st.write(value)

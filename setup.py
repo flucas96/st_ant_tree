@@ -6,7 +6,7 @@ with open('README.md') as f:
 
 setuptools.setup(
     name="st_ant_tree",
-    version="0.0.11",
+    version="0.0.13",
     author="",
     author_email="",
     description="Streamlit Component for ANT Tree",

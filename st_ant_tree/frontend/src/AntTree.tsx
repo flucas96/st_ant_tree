@@ -150,7 +150,8 @@ const TreeComponent = (props: ComponentProps) => {
   
   const onChange = (newValue: string) => {
     setValue(newValue);
-    Streamlit.setComponentValue(newValue);
+    const valueToSend = newValue === undefined ? null : newValue;
+    Streamlit.setComponentValue(valueToSend);
    // on_change_func();
   };
 

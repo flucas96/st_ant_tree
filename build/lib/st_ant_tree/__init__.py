@@ -26,7 +26,7 @@ else:
 def st_ant_tree(treeData:list = [], allowClear:bool = True, bordered:bool = True, max_height:int = 400, width_dropdown: str = "90%", disabled:bool = False, 
     	dropdownStyle: str = "{}", style: str = "{}",filterTreeNode: bool = True, multiple: bool = False, placeholder: str = "Choose an option",
         showArrow: bool = True, showSearch: bool = True, treeCheckable: bool = True, treeDefaultExpandAll: bool = False,
-        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = "", onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100,
+        treeDefaultExpandedKeys: list = [], treeLine: bool = True, onChange: str = None, onSelect: str = "", onSearch: str = "", defaultValue = None, onTreeExpand: str = "", onTreeLoad:str = "", min_height_dropdown: int = 100,
         maxTagCount:int= False,status: str=None, key = "first_tree",only_children_select=False, disable_disabled_style:bool = False, overall_css:str="") -> int:
     """
 
