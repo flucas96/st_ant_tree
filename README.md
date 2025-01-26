@@ -1,157 +1,139 @@
-Streamlit ANT Tree Select Component
+# Streamlit ANT Tree Select Component
 
-<a href="https://buymeacoffee.com/flucas" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-===
+The **Streamlit ANT Tree Select Component** adds a hierarchical dropdown selector to Streamlit, based on [Ant Design Tree Select](https://ant.design/components/tree-select/). It supports nested selections, multiple selection, and search functionality.
 
-This streamlit component adds ANT Tree Select to Streamlit
+---
 
-https://ant.design/components/tree-select/
+## Installation
 
-#Installation
+Install with pip:
 
-    pip install st-ant-tree
+```bash
+pip install st-ant-tree
+```
 
-#Usage
+---
 
-The component gets initialized by calling 'st_ant_tree'. The Component returns a list of all selected values.
+## Usage
 
-    selected_values = st_ant_tree(treeData,....)
+The component is initialized by calling `st_ant_tree`. It returns a list of selected values.
 
-## Define the the data for the dropdown. 
+```python
+from st_ant_tree import st_ant_tree
 
-The data needs to be a list that contains a dictionary. 
-
-Each data point needs atleast a 'value', which gets returned if it gets selected and a 'title' which will be shown in the selector
-
-**Some examples:**
-
-2 Options (parent 1 and parent 2) that are on the **same level**:
-
-    tree_data = [
-        {
-        "value": "parent 1",
-        "title": "Title 1",
-        },
-        {
-        "value": "parent 2",
-        "title": "Title 2",
-        }
-    ]
-
-We can add children and create **nested** selection trees
-
-    tree_data = [
-        {
-        "value": "parent 1",
+# Define tree data
+tree_data = [
+    {
+        "value": "parent_1",
         "title": "Parent 1",
-        "children": 
-            [
-                {"value": "child 1",
-                "title": "Child 1"},
-                {"value": "child 2",
-                "title": "Child 2"},
-            ]
-        },
-        {
-        "value": "parent 2",
-        "title": "Parent 2",
-        }
-    ]
+        "children": [
+            {"value": "child_1", "title": "Child 1"},
+            {"value": "child_2", "title": "Child 2"},
+        ],
+    },
+    {"value": "parent_2", "title": "Parent 2"},
+]
 
+# Use the component
+selected_values = st_ant_tree(
+    treeData=tree_data,
+    treeCheckable=True,
+    allowClear=True
+)
 
-It is possible to add **HTML Styling** to the title
+st.write(f"Selected values: {selected_values}")
+```
 
-    tree_data = [
-        {
-        "value": "parent 1",
-        "title": "Title 1",
-        },
-        {
-        "value": "parent 2",
-        "title": """<i> <b style="color:green">Parent 2</b> </i>""",
-        }
-    ]
+---
 
-## Options that change the behavior
+## Tree Data Structure
 
-**Allow the user the clear all selected options at once (enables the X on the right side in the search bar).**
+The tree data should be a list of dictionaries, where each dictionary represents a tree node. Keys include:
 
-    st_ant_tree(...,allowClear = True)
+- `value` (required): The value returned when the node is selected.
+- `title` (required): The label shown in the dropdown (can include HTML).
+- `children` (optional): A list of child nodes (nested structure).
+- `disabled` (optional): Disables the node.
 
+---
 
+### Default Selection
 
+To set a default selection, use the `defaultValue` parameter with a list of node values.
 
-**Enable Checkboxes next to each option** (this also always enables multiple selection!)
+```python
+# Define tree data
+tree_data = [
+    {
+        "value": "parent_1",
+        "title": "Parent 1",
+        "children": [
+            {"value": "child_1", "title": "Child 1"},
+            {"value": "child_2", "title": "Child 2"},
+        ],
+    },
+    {"value": "parent_2", "title": "Parent 2"},
+]
 
-    st_ant_tree(...,treeCheckable = True)
+# Set default selection
+selected_values = st_ant_tree(
+    treeData=tree_data,
+    defaultValue=["child_1"],  # List of default selected values
+    treeCheckable=True
+)
+```
 
+---
 
-**Enable multiple selection (not needed if Checkboxes are enabled)**
+## Parameters
 
-    st_ant_tree(...,multiple = True)
+Key parameters and their purpose:
 
-**It is possible to decide that the tree nodes will be hidden when filtering** 
+- `treeData` (list): The hierarchical data for the dropdown.
+- `defaultValue` (list): Preselected values.
+- `allowClear` (bool): Enables clearing selected values.
+- `treeCheckable` (bool): Adds checkboxes for multi-select.
+- `showSearch` (bool): Enables search functionality.
+- `max_height` (int): Maximum height of the dropdown.
+- `width_dropdown` (str): Width of the dropdown (e.g., `"90%"`).
+- `placeholder` (str): Placeholder text for the selector.
+- `treeLine` (bool): Displays lines connecting tree nodes.
 
-    st_ant_tree(...,filterTreeNode = True)
+---
 
-**Expand all Nodes by default**
+### Example: Searchable Dropdown
 
-    st_ant_tree(...treeDefaultExpandAll = True)
+```python
+# Define tree data
+tree_data = [
+    {
+        "value": "parent_1",
+        "title": "Parent 1",
+        "children": [
+            {"value": "child_1", "title": "Child 1"},
+            {"value": "child_2", "title": "Child 2"},
+        ],
+    },
+    {"value": "parent_2", "title": "Parent 2"},
+]
 
-**Only expand specific keys**
+# Create a searchable dropdown
+selected_values = st_ant_tree(
+    treeData=tree_data,
+    showSearch=True,
+    placeholder="Search and select",
+    treeCheckable=True
+)
 
-    #Takes a list of Keys that should be expanded. - Currenly not working
+st.write(f"Selected values: {selected_values}")
+```
 
-    st_ant_tree(..., treeDefaultExpandedKeys=["key1","key2"])
+---
 
+## Features
 
-**Maximum tag count that gets displayed in the search bar**
-
-    st_ant_tree(...,maxTagCount = 5)
-
-**The selector can be disabled**
-
-    st_ant_tree(...,disabled = True)
-
-**Show a Border**
-
-    st_ant_tree(..., bordered = True)
-
-**Define a maximum height (in px) that will not be exceeded**
-
-    st_ant_tree(..., max_height = 500)
-
-**Define the width of the dropdown (in %)**
-
-    st_ant_tree(...,width_dropdown = "90%")
-
-**Show a arrow in the search bar**
-
-    st_ant_tree(...,showArrow = True)
-
-**Show a search icon the search bar**
-
-    st_ant_tree(...,showSearch = True)
-
-**Show tree lines**
-
-    st_ant_tree(...,treeLine = True)
-
-**Set validation status**
-    
-    #"error" or "warning"
-
-    st_ant_tree(...,status="error")
-
-**Set the placeholder text in the selector**
-
-    st_ant_tree(...,placeholder="Choose an option")
-
-
-
-
-
-
-
-
+- **Nested Selections**: Supports parent-child relationships in dropdowns.
+- **Multiple Selection**: Enable with `treeCheckable=True`.
+- **Search**: Matches input with both `value` and `title` of nodes.
+- **Custom Styling**: Use HTML in `title` or modify dropdown dimensions.
 
