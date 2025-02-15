@@ -2,6 +2,10 @@
 
 The **Streamlit ANT Tree Select Component** adds a hierarchical dropdown selector to Streamlit, based on [Ant Design Tree Select](https://ant.design/components/tree-select/). It supports nested selections, multiple selection, and search functionality.
 
+<a href="https://flucas-component-overview.streamlit.app/?preselect=2" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Streamlit-red?style=for-the-badge&logo=streamlit" alt="Live Demo">
+</a>
+
 ---
 
 ## Installation
