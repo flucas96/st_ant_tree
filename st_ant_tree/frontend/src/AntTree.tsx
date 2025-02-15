@@ -159,8 +159,11 @@ const TreeComponent = (props: ComponentProps) => {
     on_select_func();
   };
 
-  const onSearch = () => {
-    on_search_func();
+  const onSearch = (val: string) => {
+    setSearchValue(val); // Keep search value
+    if (on_search) {
+      Function(on_search)();
+    }
   };
 
 
@@ -238,15 +241,14 @@ function loop_through_treeData(treeData: any) {
       id  = {key}
       showSearch = {showSearch}
       showArrow = {showArrow}
-     // filterTreeNode = {filterTreeNode}
       multiple = {multiple}
       disabled = {disabled}
       treeCheckable = {treeCheckable}
       treeLine = {treeLine}
       status= {status}
       treeDefaultExpandedKeys = {treeDefaultExpandedKeys}
-      placement = "bottomLeft"
-      style={{ width: width_dropdown, marginTop: "10px" }}
+      placement="bottomLeft"  // Ensures dropdown always appears below
+      style={{ width: width_dropdown, marginTop: "10px", position: "relative", zIndex: 1000 }} // Ensures visibility
       onSearch={onSearch}
       onSelect={onSelect}
       defaultValue={defaultValue_tree}
@@ -261,7 +263,13 @@ function loop_through_treeData(treeData: any) {
       onDropdownVisibleChange={onDropdownVisibleChange}
       onTreeExpand = {onTreeExpand_func}
       maxTagCount = {maxTagCount}
-      onClear = {() => {Streamlit.setComponentValue(undefined)}}
+    //  onClear = {() => {Streamlit.setComponentValue(undefined)}}
+      onClear={() => { 
+      Streamlit.setComponentValue(undefined);
+      setSearchValue(''); // Clear search on reset
+    }}
+    searchValue={searchValue} // Maintain search input
+
 
       //on clear
       bordered = {bordered}
